@@ -5,18 +5,18 @@ export class Note {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('varchar')
+  @Column('varchar', { nullable: false })
   title: string;
 
-  @Column('text')
+  @Column('text', { nullable: false })
   content: string;
 
   @Column('boolean', { default: true })
-  state: string;
-
-  @Column('timestamptz', { default: () => 'CURRENT_TIMESTAMP' })
-  created: Date;
+  state: boolean;
 
   @Column('timestamptz')
+  created: Date;
+
+  @Column('timestamptz', { default: () => 'CURRENT_TIMESTAMP' })
   updated: Date;
 }
