@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { CreateNoteDto } from './dto/create-note.dto';
-import { UpdateNoteDto } from './dto/update-note.dto';
+import { ActiveOrArchiveDto, UpdateNoteDto } from './dto/update-note.dto';
 import { Note } from './entities/note.entity';
 import { Repository } from 'typeorm';
 
@@ -43,8 +43,8 @@ export class NoteService {
     return this.noteRepository.delete(id);
   }
 
-  async archive(id: number) {
+  async activeOrArchive(id: number, archive: ActiveOrArchiveDto) {
     await this.findOne(id);
-    return this.noteRepository.update(id, { state: false });
+    return this.noteRepository.update(id, archive);
   }
 }

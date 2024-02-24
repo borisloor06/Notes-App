@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { NoteService } from './note.service';
 import { CreateNoteDto } from './dto/create-note.dto';
-import { UpdateNoteDto } from './dto/update-note.dto';
+import { ActiveOrArchiveDto, UpdateNoteDto } from './dto/update-note.dto';
 
 @Controller('note')
 export class NoteController {
@@ -97,9 +97,9 @@ export class NoteController {
   }
 
   @Patch('archive/:id')
-  async archive(@Param('id') id: string) {
+  async archive(@Param('id') id: string, @Body() archive: ActiveOrArchiveDto) {
     try {
-      const archivedNote = await this.noteService.archive(+id);
+      const archivedNote = await this.noteService.activeOrArchive(+id, archive);
       return archivedNote;
     } catch (error) {
       throw new BadRequestException('Error archiving note');
