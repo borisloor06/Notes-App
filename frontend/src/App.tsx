@@ -1,14 +1,17 @@
-import Footer from "./src/Components/Footer/Footer";
-import Navbar from "./src/Components/Navbar/Navbar";
+import { BrowserRouter, Route } from "react-router-dom";
 import Layout from "./src/Pages/Layout/Layout";
+import RoutesWithNotFound from "./src/Pages/404/RoutesWithNotFound";
+import NotesList from "./src/Pages/NoteList/NoteList";
 
 function App() {
   return (
-    <main className="flex flex-col h-screen">
-      <Navbar />
-      <Layout />
-      <Footer />
-    </main>
+    <BrowserRouter>
+      <RoutesWithNotFound>
+        <Route element={<Layout />}>
+          <Route path="/" element={<NotesList />} />
+        </Route>
+      </RoutesWithNotFound>
+    </BrowserRouter>
   );
 }
 
