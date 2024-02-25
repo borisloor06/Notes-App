@@ -33,6 +33,6 @@ services:
       - "${FRONTEND_PORT}:3001"
     environment:
       - BACKEND_PORT=${BACKEND_PORT}
-      - BACKEND_HOST=note-backend
+      - BACKEND_HOST=${BACKEND_HOST}
     depends_on:
       - note-backend
