@@ -14,39 +14,37 @@ then
         export PG_DB=note-app
         export DB_PORT=5432
         echo "find free port for postgres"
-        set startBackPort=3000
-        set backPort=0
+        startBackPort=3000
+        backPort=0
 
-        :SEARCHPORT 
-        netstat -o -n -a | findstr ":%startBackPort%" 
-        if %ERRORLEVEL% equ 0 
-        ( echo "port unavailable %ERRORLEVEL%"
-        set /a startBackPort +=1
-        GOTO :SEARCHPORT 
-        ) ELSE (
-            echo "port available %ERRORLEVEL%"
-            set backPort=%startBackPort%
-            GOTO :FOUNDPORT 
-        )
+        :while true; do
+            netstat -o -n -a | grep ":$startFrontPort"
+            if [ $? -eq 0 ]; then
+                echo "Port unavailable"
+                startFrontPort=$((startFrontPort+1))
+            else
+                echo "Port available"
+                frontPort=$startFrontPort
+                break
+            fi
+        done
 
-        :FOUNDPORT
         EXPORT BACKEND_PORT=$backPort
-        set startFrontPort=$backPort
-        set frontPort=0
+        startFrontPort=$backPort
+        frontPort=0
 
-        :SEARCHPORT 
-        netstat -o -n -a | findstr ":%startFrontPort%" 
-        if %ERRORLEVEL% equ 0 
-        ( echo "port unavailable %ERRORLEVEL%"
-        set /a startFrontPort +=1
-        GOTO :SEARCHPORT 
-        ) ELSE (
-            echo "port available %ERRORLEVEL%"
-            set frontPort=%startFrontPort%
-            GOTO :FOUNDPORT 
-        )
+        while true; do
+            netstat -o -n -a | grep ":$startFrontPort"
+            if [ $? -eq 0 ]; then
+                echo "Port unavailable"
+                startFrontPort=$((startFrontPort+1))
+            else
+                echo "Port available"
+                frontPort=$startFrontPort
+                break
+            fi
+        done
 
-        :FOUNDPORT
         EXPORT FRONTED_PORT=$frontPort
 
         # create dir for volume postgres-data if not exists
