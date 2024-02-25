@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import SaveIcon from "../../Components/SVG/SaveIcon/SaveIcon";
 import CloseIcon from "../../Components/SVG/CloseIcon/CloseIcon";
-import { useNote } from "../NoteList/Hooks/Note.hook";
+import { useNote } from "./Hooks/Note.hook";
 import { Note, notesInitialState } from "../NoteList/interfaces/Note.type";
 
 export default function NewNote() {
