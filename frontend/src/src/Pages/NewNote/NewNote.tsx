@@ -5,7 +5,7 @@ import CloseIcon from "../../Components/SVG/CloseIcon/CloseIcon";
 import { useNote } from "./Hooks/Note.hook";
 import { Note, notesInitialState } from "../NoteList/interfaces/Note.type";
 import { useSaveNote } from "./Hooks/NewNote.hook";
-import Swal from "sweetalert2";
+import { Toast } from "../../Constants/constants";
 
 export default function NewNote() {
   const navigation = useNavigate();
@@ -20,18 +20,6 @@ export default function NewNote() {
       setNewNote(note);
     }
   }, [note, newNote.id]);
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "bottom-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -56,12 +44,11 @@ export default function NewNote() {
         icon: "success",
         title: "Saved successfully",
       });
-      if (note.state) {
-        navigation("/");
-      } else {
-        navigation(`/archive`);
+      console.log(note)
+      if (!note.state && note?.id) {
+        return navigation(`/archive`);
       }
-
+      navigation("/");
     }
   };
 

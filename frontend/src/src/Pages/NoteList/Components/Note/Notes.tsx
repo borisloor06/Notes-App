@@ -6,6 +6,7 @@ import { archiveNote, deleteNote } from "../../Services/Note.service";
 import { NoteProps } from "../../interfaces/NoteProps.type";
 import { useNavigate } from "react-router-dom";
 import UnarchiveIcon from "../../../../Components/SVG/UnarchiveIcon/UnarchiveIcon";
+import { Toast } from "../../../../Constants/constants";
 
 export default function Note({
   title,
@@ -32,12 +33,20 @@ export default function Note({
   const handleDelete = async () => {
     if (!id) return;
     await deleteNote(id);
+    Toast.fire({
+      icon: "success",
+      title: "Note deleted successfully",
+    });
     reload();
   };
 
   const handleArchive = async () => {
     if (!id) return;
     await archiveNote(id, false);
+    Toast.fire({
+      icon: "success",
+      title: "Note archived successfully",
+    });
     reload();
   };
 
