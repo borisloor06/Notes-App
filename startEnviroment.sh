@@ -30,7 +30,7 @@ then
             if [ $? -eq 0 ]
             then
                 echo "starting docker"
-                docker-compose up -d
+                docker-compose up -d --build
                 echo "create database"
                 # create database from sql file pg
                 docker exec -i pg-note-app psql postgresql://$PG_USER:$PG_PASS@$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'):$DB_PORT/$PG_DB < ./note.sql
