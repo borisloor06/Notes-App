@@ -15,3 +15,9 @@ export const notesInitialState = {
   created: "",
   updated: "",
 };
+
+
+export enum NoteState {
+  ACTIVE = "active",
+  ARCHIVED = "archive",
+}

@@ -1,11 +1,12 @@
 import { URL_API } from "../../../Constants/constants";
-import { Note } from "../interfaces/Note.type";
-import { NoteState } from "../interfaces/NoteListProps.type";
+import { Note, NoteState } from "../interfaces/Note.type";
 
 export const getNotes = async (type: NoteState) => {
   const response = await fetch(`${URL_API}/note/${type}`);
+  if (!response.ok) {
+    throw new Error("Error fetching notes");
+  }
   const notes = (await response.json()) as Note[];
-
   return notes;
 };
 

@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 
-import { Note } from "../interfaces/Note.type";
+import { Note, NoteState } from "../interfaces/Note.type";
 import { getNotes } from "../Services/Note.service";
-import { NoteState } from "../interfaces/NoteListProps.type";
 
 export function useNotes(initialState: Note[], type: NoteState) {
   const [notes, setNotes] = useState<Note[]>(initialState);
 
   useEffect(() => {
-    refetchNotes();
+    refetchNotes(type);
   }, []);
 
-  const refetchNotes = () => {
+  const refetchNotes = (type: NoteState) => {
     getNotes(type)
       .then((notes) => {
         setNotes(notes);
       })
       .catch(() => {
+        console.log("error");
         setNotes(initialState);
       });
   };
