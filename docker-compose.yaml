@@ -30,7 +30,7 @@ services:
     container_name: note-app
     build: .
     ports:
-      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+      - "${FRONTEND_PORT}:3001"
     environment:
       - BACKEND_PORT=${BACKEND_PORT}
       - PORT=${FRONTEND_PORT}

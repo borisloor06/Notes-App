@@ -15,7 +15,7 @@ then
         export DB_PORT=5432
         export BACKEND_PORT=3000
         export FRONTEND_PORT=3001
-        echo "port for backend: $BACKEND_PORT", "port for fronted: $FRONTED_PORT"
+        echo "port for backend: $BACKEND_PORT", "port for fronted: $FRONTEND_PORT"
         # create dir for volume postgres-data if not exists
         if [ ! -d ./postgres-data ]; then
             echo "create dir postgres-data for volume"
