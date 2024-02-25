@@ -7,8 +7,32 @@ services:
       - POSTGRES_USER=${PG_USER}
       - POSTGRES_PASSWORD=${PG_PASS}
       - POSTGRES_DB=${PG_DB} #optional (specify default database instead of $POSTGRES_DB)
-    ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - POSTGRES_PORT=${PG_PORT}
     restart: always
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+
+  note-backend:
+    container_name: note-backend
+    build: ./backend
+    ports:
+      - "${BACKEND_PORT}:3000"
+    environment:
+      - DB_HOST=postgres
+      - DB_USER=${PG_USER}
+      - DB_PASSWORD=${PG_PASS}
+      - DB_DATABASE=${PG_DB}
+      - DB_PORT=${PG_PORT}
+    depends_on:
+      - postgres
+
+  note-app:
+    container_name: note-app
+    build: .
+    ports:
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
+    environment:
+      - BACKEND_PORT=${BACKEND_PORT}
+      - PORT=${FRONTEND_PORT}
+    depends_on:
+      - note-backend
