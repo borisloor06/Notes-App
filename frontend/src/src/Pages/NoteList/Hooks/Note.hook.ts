@@ -1,25 +1,28 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Note } from "../interfaces/Note.type";
+import { getNote } from "../Services/Note.service";
 
-import { Note, NoteState } from "../interfaces/Note.type";
-import { getNotes } from "../Services/Note.service";
-
-export function useNotes(initialState: Note[], type: NoteState) {
-  const [notes, setNotes] = useState<Note[]>(initialState);
+export const useNote = (id: string | undefined) => {
+  const [note, setNote] = useState({} as Note);
 
   useEffect(() => {
-    refetchNotes(type);
-  }, []);
-
-  const refetchNotes = (type: NoteState) => {
-    getNotes(type)
-      .then((notes) => {
-        setNotes(notes);
-      })
-      .catch(() => {
-        console.log("error");
-        setNotes(initialState);
+    setNote({} as Note);
+    if (id) {
+      console.log("Editing note with id: ", id);
+      getNote(id).then((note) => {
+        setNote(note);
       });
+    }
+
+    return () => {
+      clearNote();
+    };
+
+  }, [id]);
+
+  const clearNote = () => {
+    setNote({} as Note);
   };
 
-  return { notes, refetchNotes };
-}
+  return { note, clearNote };
+};

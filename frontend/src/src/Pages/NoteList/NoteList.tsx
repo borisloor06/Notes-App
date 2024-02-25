@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Note from "./Components/Note/Notes";
-import { useNotes } from "./Hooks/Note.hook";
+import { useNotes } from "./Hooks/Notes.hook";
 import { notesInitialState } from "./interfaces/Note.type";
 import { NoteListProps } from "./interfaces/NoteListProps.type";
 
