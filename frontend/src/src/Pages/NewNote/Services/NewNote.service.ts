@@ -1,5 +1,5 @@
 import { URL_API } from "../../../Constants/constants";
-import { Note } from "../../NoteList/interfaces/Note.type";
+import { Note, UpdatedNote } from "../../NoteList/interfaces/Note.type";
 
 export const createNote = async (note: Note) => {
   const response = await fetch(`${URL_API}/note`, {
@@ -10,7 +10,12 @@ export const createNote = async (note: Note) => {
     body: JSON.stringify(note),
   });
 
-  return response.json();
+  if (!response.ok) {
+    throw new Error("There was an error creating the note");
+  }
+
+  const newNote = (await response.json()) as Note;
+  return newNote;
 };
 
 export const updateNote = async (note: Note) => {
@@ -22,12 +27,22 @@ export const updateNote = async (note: Note) => {
     body: JSON.stringify(note),
   });
 
-  return response.json();
+  if (!response.ok) {
+    throw new Error("There was an error updating the note");
+  }
+
+  const updatedNote = (await response.json()) as UpdatedNote;
+
+  return updatedNote;
 };
 
 export const getNote = async (id: string) => {
   const response = await fetch(`${URL_API}/note/${id}`);
-  const note = (await response.json()) as Note;
 
+  if (!response.ok) {
+    throw new Error("There was an error getting the note");
+  }
+
+  const note = (await response.json()) as Note;
   return note;
 };

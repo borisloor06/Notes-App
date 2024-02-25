@@ -16,8 +16,13 @@ export const notesInitialState = {
   updated: "",
 };
 
-
 export enum NoteState {
   ACTIVE = "active",
   ARCHIVED = "archive",
+}
+
+export interface UpdatedNote {
+  generatedMaps: [];
+  raw: [];
+  affected: number;
 }
