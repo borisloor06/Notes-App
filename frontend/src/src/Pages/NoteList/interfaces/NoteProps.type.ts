@@ -1,8 +1,5 @@
-export interface NoteProps {
-  id?: string;
-  title: string;
-  content: string;
-  created: string;
-  updated: string;
+import { Note } from "./Note.type";
+
+export interface NoteProps extends Note{
   reload: () => void;
 }

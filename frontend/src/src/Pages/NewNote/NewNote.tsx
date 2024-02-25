@@ -56,7 +56,12 @@ export default function NewNote() {
         icon: "success",
         title: "Saved successfully",
       });
-      navigation("/");
+      if (note.state) {
+        navigation("/");
+      } else {
+        navigation(`/archive`);
+      }
+
     }
   };
 
