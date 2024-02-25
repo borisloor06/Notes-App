@@ -13,40 +13,8 @@ then
         export PG_PASS=7xN4bFN89DfW4I0r5+Jugf4xqmaBL2gYM8jT08l0r3SqWijSafupIkrkfwmYE22
         export PG_DB=note-app
         export DB_PORT=5432
-        echo "find free port for backend"
-        startBackPort=0
-        backPort=0
-
-        while true; do
-            netstat -o -n -a | grep ":$startBackPort"
-            if [ $? -eq 0 ]; then
-                echo "Port unavailable"
-                startBackPort=$((startFrontPort+1))
-            else
-                echo "Port available"
-                frontPort=$startBackPort
-                break
-            fi
-        done
-
-        export BACKEND_PORT=$backPort
-        echo "find free port for fronted"
-        startFrontPort=0
-        frontPort=0
-
-        while true; do
-            netstat -o -n -a | grep ":$startFrontPort"
-            if [ $? -eq 0 ]; then
-                echo "Port unavailable"
-                startFrontPort=$((startFrontPort+1))
-            else
-                echo "Port available"
-                frontPort=$startFrontPort
-                break
-            fi
-        done
-
-        export FRONTED_PORT=$frontPort
+        export BACKEND_PORT=3000        
+        export FRONTED_PORT=3001
         echo "port for backend: $BACKEND_PORT", "port for fronted: $FRONTED_PORT"
         # create dir for volume postgres-data if not exists
         if [ ! -d ./postgres-data ]; then
