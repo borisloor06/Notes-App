@@ -28,7 +28,7 @@ services:
 
   note-app:
     container_name: note-app
-    build: .
+    build: ./frontend
     ports:
       - "${FRONTEND_PORT}:3001"
     environment:
