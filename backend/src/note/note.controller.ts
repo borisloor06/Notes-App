@@ -64,6 +64,9 @@ export class NoteController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     try {
+      if (isNaN(+id)) {
+        throw new BadRequestException('Invalid id');
+      }
       const note = await this.noteService.findOne(+id);
       if (!note) {
         throw new NotFoundException('Note not found');
@@ -78,6 +81,9 @@ export class NoteController {
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateNoteDto: UpdateNoteDto) {
     try {
+      if (isNaN(+id)) {
+        throw new BadRequestException('Invalid id');
+      }
       const note = await this.noteService.update(+id, updateNoteDto);
       return note;
     } catch (error) {
@@ -89,6 +95,9 @@ export class NoteController {
   @Delete(':id')
   async remove(@Param('id') id: string) {
     try {
+      if (isNaN(+id)) {
+        throw new BadRequestException('Invalid id');
+      }
       const deletedNote = await this.noteService.remove(+id);
       return deletedNote;
     } catch (error) {
@@ -99,6 +108,9 @@ export class NoteController {
   @Patch('archive/:id')
   async archive(@Param('id') id: string, @Body() archive: ActiveOrArchiveDto) {
     try {
+      if (isNaN(+id)) {
+        throw new BadRequestException('Invalid id');
+      }
       const archivedNote = await this.noteService.activeOrArchive(+id, archive);
       return archivedNote;
     } catch (error) {
