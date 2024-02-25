@@ -7,7 +7,7 @@ services:
       - POSTGRES_USER=${PG_USER}
       - POSTGRES_PASSWORD=${PG_PASS}
       - POSTGRES_DB=${PG_DB} #optional (specify default database instead of $POSTGRES_DB)
-      - POSTGRES_PORT=${PG_PORT}
+      - POSTGRES_PORT=${DB_PORT}
     restart: always
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
@@ -22,7 +22,7 @@ services:
       - DB_USER=${PG_USER}
       - DB_PASSWORD=${PG_PASS}
       - DB_DATABASE=${PG_DB}
-      - DB_PORT=${PG_PORT}
+      - DB_PORT=${DB_PORT}
     depends_on:
       - postgres
 

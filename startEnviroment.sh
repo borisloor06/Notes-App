@@ -13,7 +13,7 @@ then
         export PG_PASS=7xN4bFN89DfW4I0r5+Jugf4xqmaBL2gYM8jT08l0r3SqWijSafupIkrkfwmYE22
         export PG_DB=note-app
         export DB_PORT=5432
-        echo "find free port for postgres"
+        echo "find free port for backend"
         startBackPort=3000
         backPort=0
 
@@ -30,6 +30,7 @@ then
         done
 
         export BACKEND_PORT=$backPort
+        echo "find free port for fronted"
         startFrontPort=$backPort
         frontPort=0
 
@@ -46,7 +47,7 @@ then
         done
 
         export FRONTED_PORT=$frontPort
-
+        echo "port for backend: $BACKEND_PORT", "port for fronted: $FRONTED_PORT"
         # create dir for volume postgres-data if not exists
         if [ ! -d ./postgres-data ]; then
             echo "create dir postgres-data for volume"
