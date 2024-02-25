@@ -14,7 +14,7 @@ then
         export PG_DB=note-app
         export DB_PORT=5432
         echo "find free port for backend"
-        startBackPort=3000
+        startBackPort=0
         backPort=0
 
         while true; do
