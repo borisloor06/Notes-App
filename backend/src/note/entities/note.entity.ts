@@ -11,7 +11,7 @@ export class Note {
   @Column('text', { nullable: false })
   content: string;
 
-  @Column('boolean', { default: true })
+  @Column('bool', { default: true, nullable: false })
   state: boolean;
 
   @Column('timestamptz')

@@ -13,7 +13,12 @@ export class NoteService {
   ) {}
   async create({ title, content }: CreateNoteDto) {
     const created = new Date();
-    const note = await this.noteRepository.save({ title, content, created });
+    const note = await this.noteRepository.save({
+      title,
+      content,
+      created,
+      state: true,
+    });
     return note;
   }
 
