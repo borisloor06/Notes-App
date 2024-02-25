@@ -4,27 +4,29 @@ import ArchiveIcon from "../../../../Components/SVG/ArchiveIcon/ArchiveIcon";
 import EditIcon from "../../../../Components/SVG/EditIcon/EditIcon";
 import { archiveNote, deleteNote } from "../../Services/Note.service";
 import { NoteProps } from "../../interfaces/NoteProps.type";
+import { useNavigate } from "react-router-dom";
 
 export default function Note({ title, content, created, updated, id, reload }: NoteProps) {
   const lastTimeUpdated = updated ? updated : created;
+	const navigate = useNavigate();
+
   const daysAgo = Math.floor(
     (new Date().getTime() - new Date(lastTimeUpdated).getTime()) /
       (1000 * 3600 * 24)
   );
 
   const handleEdit = () => {
-    console.log("Edit", id);
+    if (!id) return;
+    navigate(`/edit/${id}`);
   };
 
   const handleDelete = async () => {
-    console.log("Delete", id);
     if (!id) return;
     await deleteNote(id);
     reload();
   };
 
   const handleArchive = async () => {
-    console.log("Archive", id);
     if (!id) return;
     await archiveNote(id, true);
     reload();
