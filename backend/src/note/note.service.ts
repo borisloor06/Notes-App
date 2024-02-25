@@ -23,11 +23,17 @@ export class NoteService {
   }
 
   async findActives() {
-    return this.noteRepository.find({ where: { state: true } });
+    return this.noteRepository.find({
+      where: { state: true },
+      order: { id: 'DESC' },
+    });
   }
 
   async findArchives() {
-    return this.noteRepository.find({ where: { state: false } });
+    return this.noteRepository.find({
+      where: { state: false },
+      order: { id: 'DESC' },
+    });
   }
 
   async findAll() {
