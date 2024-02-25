@@ -33,7 +33,7 @@ then
                 docker-compose up -d
                 echo "create database"
                 # create database from sql file pg
-                docker exec -i pg-note-app psql postgresql://$PG_USER:$PG_PASS@localhost:$DB_PORT/$PG_DB < ./note.sql
+                docker exec -i pg-note-app psql postgresql://$PG_USER:$PG_PASS@$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'):$DB_PORT/$PG_DB < ./note.sql
             else
                 echo "you need to install docker-compose" >&2
             fi
