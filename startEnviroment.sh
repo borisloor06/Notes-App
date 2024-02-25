@@ -18,13 +18,13 @@ then
         backPort=0
 
         while true; do
-            netstat -o -n -a | grep ":$startFrontPort"
+            netstat -o -n -a | grep ":$startBackPort"
             if [ $? -eq 0 ]; then
                 echo "Port unavailable"
-                startFrontPort=$((startFrontPort+1))
+                startBackPort=$((startFrontPort+1))
             else
                 echo "Port available"
-                frontPort=$startFrontPort
+                frontPort=$startBackPort
                 break
             fi
         done
