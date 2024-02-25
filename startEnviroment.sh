@@ -29,7 +29,7 @@ then
             fi
         done
 
-        EXPORT BACKEND_PORT=$backPort
+        export BACKEND_PORT=$backPort
         startFrontPort=$backPort
         frontPort=0
 
@@ -45,7 +45,7 @@ then
             fi
         done
 
-        EXPORT FRONTED_PORT=$frontPort
+        export FRONTED_PORT=$frontPort
 
         # create dir for volume postgres-data if not exists
         if [ ! -d ./postgres-data ]; then
