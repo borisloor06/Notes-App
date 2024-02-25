@@ -2,9 +2,10 @@ import React from "react";
 import Note from "./Components/Note/Notes";
 import { useNotes } from "./Hooks/Note.hook";
 import { notesInitialState } from "./interfaces/Note.type";
+import { NoteListProps } from "./interfaces/NoteListProps.type";
 
-export default function NotesList() {
-  const {notes, refetchNotes} = useNotes([notesInitialState]);
+export default function NotesList({ type }: NoteListProps) {
+  const { notes, refetchNotes } = useNotes([notesInitialState], type);
 
   const reloadNotes = () => {
     refetchNotes();
