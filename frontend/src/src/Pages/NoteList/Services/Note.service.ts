@@ -52,6 +52,9 @@ export const getNote = async (id: string) => {
 export const archiveNote = async (id: string, state: boolean) => {
   const response = await fetch(`${URL_API}/note/archive/${id}`, {
     method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ state }),
   });
 

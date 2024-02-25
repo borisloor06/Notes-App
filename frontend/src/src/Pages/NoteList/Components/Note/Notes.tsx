@@ -28,7 +28,7 @@ export default function Note({ title, content, created, updated, id, reload }: N
 
   const handleArchive = async () => {
     if (!id) return;
-    await archiveNote(id, true);
+    await archiveNote(id, false);
     reload();
   };
 
