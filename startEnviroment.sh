@@ -31,7 +31,7 @@ then
 
         export BACKEND_PORT=$backPort
         echo "find free port for fronted"
-        startFrontPort=$backPort
+        startFrontPort=0
         frontPort=0
 
         while true; do
