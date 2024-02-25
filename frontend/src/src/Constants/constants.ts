@@ -1,7 +1,8 @@
 import Swal from "sweetalert2";
 
-const BACKEND_PORT = process.env.BACKEND_PORT || 3000;
-export const URL_API = `http://localhost:${BACKEND_PORT}`;
+const PORT = process.env.BACKEND_PORT || 3000;
+const HOST = process.env.BACKEND_HOST || "localhost";
+export const URL_API = `http://${HOST}:${PORT}`;
 
 export const Toast = Swal.mixin({
   toast: true,
