@@ -4,11 +4,10 @@ import { useNotes } from "./Hooks/Note.hook";
 import { notesInitialState } from "./interfaces/Note.type";
 
 export default function NotesList() {
-  const getNotes = useNotes([notesInitialState]);
-  let notes = getNotes;
+  const {notes, refetchNotes} = useNotes([notesInitialState]);
 
   const reloadNotes = () => {
-    notes = getNotes;
+    refetchNotes();
   };
 
   return (

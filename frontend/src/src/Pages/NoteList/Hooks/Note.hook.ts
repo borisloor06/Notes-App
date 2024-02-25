@@ -3,10 +3,14 @@ import { useEffect, useState } from "react";
 import { Note } from "../interfaces/Note.type";
 import { getNotes } from "../Services/Note.service";
 
-export function useNotes(initialState: Note[]): Note[] {
+export function useNotes(initialState: Note[]) {
   const [notes, setNotes] = useState<Note[]>(initialState);
 
   useEffect(() => {
+    refetchNotes();
+  }, []);
+
+  const refetchNotes = () => {
     getNotes()
       .then((notes) => {
         setNotes(notes);
@@ -14,7 +18,7 @@ export function useNotes(initialState: Note[]): Note[] {
       .catch(() => {
         setNotes(initialState);
       });
-  }, []);
+  }
 
-  return notes;
+  return {notes, refetchNotes};
 }
