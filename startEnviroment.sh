@@ -17,7 +17,7 @@ then
         startBackPort=3000
         backPort=0
 
-        :while true; do
+        while true; do
             netstat -o -n -a | grep ":$startFrontPort"
             if [ $? -eq 0 ]; then
                 echo "Port unavailable"
