@@ -60,12 +60,12 @@ export default function Note({
   const validCategories = categories.length && categories[0].id !== 0;
   return (
     <article className="bg-white p-4 rounded shadow">
-      <div className="flex justify-between items-center">
+      <header className="flex justify-between items-center">
         <h3 className="font-medium text-xl">{title}</h3>
 
-        <div className="flex items-center text-gray-400">
+        <section className="flex items-center text-gray-400">
           <button
-            className="hover:text-black text-xl  p-1"
+            className="text-blue-400 hover:text-blue-600  text-xl  p-1"
             onClick={handleEdit}
           >
             <EditIcon />
@@ -92,33 +92,40 @@ export default function Note({
           >
             <DeleteIcon />
           </button>
-        </div>
-      </div>
+        </section>
+      </header>
       <p className="text-gray-600 mt-2">{content.slice(0, 50)}...</p>
-      <p className="text-gray-600 mt-2 text-sm">
+      <p className="text-gray-600 mt-6 text-sm">
         Last edited {daysAgo} days ago
       </p>
       {validCategories ? (
-        <footer className="flex justify-between items-center mt-4">
-          {/* show categories */}
-          <h3 className="text-gray-400 text-sm">Categories</h3>
+        <footer className="bg-gray-50 p-4 md:flex md:items-center md:justify-between">
+          <section className="mb-2 md:mb-0 lg:flex-row lg:flex-inline flex flex-col items-center justify-between gap-2">
+            <h3 className="text-black text-sm uppercase tracking-widest">
+              Categories
+            </h3>
 
-          <div className="flex flex-wrap">
-            {categories.slice(0, 2).map((category, index) => (
-              <article
-                key={index}
-                className="bg-stone-200 text-stone-600 px-2 py-1 rounded mr-2 text-sm"
-              >
-                {category.name}
-              </article>
-            ))}
+            <article className="flex flex-wrap flex-inline flex-1 gap-1">
+              {categories.slice(0, 2).map((category, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-black px-2 py-1 rounded text-sm"
+                >
+                  {category.name}
+                </a>
+              ))}
 
-            {categories.length > 2 && (
-              <article className="bg-gray-200 text-gray-600 px-2 py-1 rounded mr-2 text-sm">
-                +{categories.length - 2} more
-              </article>
-            )}
-          </div>
+              {categories.length > 2 && (
+                <a
+                  href="#"
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-600 hover:text-black px-2 py-1 rounded text-sm"
+                >
+                  +{categories.length - 2} more
+                </a>
+              )}
+            </article>
+          </section>
         </footer>
       ) : null}
     </article>

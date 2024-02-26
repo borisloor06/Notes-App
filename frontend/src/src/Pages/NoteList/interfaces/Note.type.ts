@@ -1,4 +1,4 @@
-import { Category } from "./Category.type";
+import { Category } from "../../Categories/Interfaces/Category.type";
 
 export interface Note {
   id?: string;
