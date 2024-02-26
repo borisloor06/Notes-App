@@ -10,13 +10,13 @@ export const useSaveNote = () => {
   const [error, setError] = useState(false);
   const [savedNote, setSavedNote] = useState(notesInitialState as Note);
 
-  const saveNote = (note: NewNote) => {
+  const saveNote = async (note: NewNote) => {
     if (!note) {
       setError(true);
     }
     try {
       if (!note.id) {
-        createNote(note)
+        await createNote(note)
           .then((newNote) => {
             setSavedNote(newNote);
           })
@@ -25,7 +25,7 @@ export const useSaveNote = () => {
           });
         return;
       }
-      updateNote(note).then((updatedNote) => {
+      await updateNote(note).then((updatedNote) => {
         if (updatedNote.affected === 0) {
           setError(true);
           return;

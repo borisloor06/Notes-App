@@ -6,7 +6,7 @@ import { useNote } from "./Hooks/Note.hook";
 import { NewNote, newNoteInitialState } from "../NoteList/interfaces/Note.type";
 import { useSaveNote } from "./Hooks/NewNote.hook";
 import { Toast } from "../../Constants/constants";
-import { useCategories } from "./Hooks/Categories.hook";
+import { useCategories } from "../Categories/Hooks/Categories.hook";
 
 export default function NewNote() {
   const navigation = useNavigate();
@@ -52,8 +52,8 @@ export default function NewNote() {
     }
   };
 
-  const handleSave = () => {
-    saveNote(newNote);
+  const handleSave = async () => {
+    await saveNote(newNote);
     if (error) {
       Toast.fire({
         icon: "error",
@@ -77,13 +77,6 @@ export default function NewNote() {
   };
 
   const validCategories = categories?.length > 0 && categories[0].id;
-  const categoryStyle = `
-  bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5
-  rounded
-`;
-  const checkboxStyle = `
-  h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500
-`;
 
   return (
     <div className="bg-white rounded shadow p-4 m-2 lg:mx-72">
