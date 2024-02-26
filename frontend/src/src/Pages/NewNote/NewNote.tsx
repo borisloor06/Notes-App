@@ -92,7 +92,7 @@ export default function NewNote() {
 
         <div className="flex items-center text-gray-400">
           <button
-            className="hover:text-black text-xl  p-1 md:w-28 inline-flex"
+            className="hover:text-green-600 text-green-400  text-xl  p-1 md:w-28 inline-flex"
             onClick={handleSave}
           >
             <SaveIcon />

@@ -94,7 +94,10 @@ export default function Note({
           </button>
         </section>
       </header>
-      <p className="text-gray-600 mt-2">{content.slice(0, 50)}...</p>
+      <p className="text-gray-600 mt-2">
+        {content.slice(0, 50)}
+        {content.length > 50 ? <span>...</span> : null}
+      </p>
       <p className="text-gray-600 mt-6 text-sm">
         Last edited {daysAgo} days ago
       </p>
