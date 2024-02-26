@@ -15,6 +15,7 @@ export default function Note({
   updated,
   state,
   id,
+  categories,
   reload,
 }: NoteProps) {
   const lastTimeUpdated = updated ? updated : created;
@@ -96,6 +97,29 @@ export default function Note({
       <p className="text-gray-600 mt-2 text-sm">
         Last edited {daysAgo} days ago
       </p>
+      {categories.length && (
+        <footer className="flex justify-between items-center mt-4">
+          {/* show categories */}
+          <h3 className="text-gray-400 text-sm">Categories</h3>
+
+          <div className="flex flex-wrap">
+            {categories.slice(0, 3).map((category, index) => (
+              <article
+                key={index}
+                className="bg-stone-200 text-stone-600 px-2 py-1 rounded mr-2 text-sm"
+              >
+                {category.name}
+              </article>
+            ))}
+
+            {categories.length > 3 && (
+              <article className="bg-gray-200 text-gray-600 px-2 py-1 rounded mr-2 text-sm">
+                +{categories.length - 3} more
+              </article>
+            )}
+          </div>
+        </footer>
+      )}
     </article>
   );
 }

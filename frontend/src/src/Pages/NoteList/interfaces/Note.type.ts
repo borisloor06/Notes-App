@@ -1,3 +1,5 @@
+import { Category } from "./Category.type";
+
 export interface Note {
   id?: string;
   title: string;
@@ -5,6 +7,7 @@ export interface Note {
   state: boolean;
   created: string;
   updated: string;
+  categories: Category[];
 }
 
 export const notesInitialState = {
@@ -14,6 +17,7 @@ export const notesInitialState = {
   state: true,
   created: "",
   updated: "",
+  categories: [],
 };
 
 export enum NoteState {
