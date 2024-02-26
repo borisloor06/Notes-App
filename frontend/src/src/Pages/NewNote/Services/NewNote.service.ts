@@ -1,7 +1,7 @@
 import { URL_API } from "../../../Constants/constants";
-import { Note, UpdatedNote } from "../../NoteList/interfaces/Note.type";
+import { NewNote, Note, UpdatedNote } from "../../NoteList/interfaces/Note.type";
 
-export const createNote = async (note: Note) => {
+export const createNote = async (note: NewNote) => {
   const response = await fetch(`${URL_API}/note`, {
     method: "POST",
     headers: {
@@ -18,7 +18,7 @@ export const createNote = async (note: Note) => {
   return newNote;
 };
 
-export const updateNote = async (note: Note) => {
+export const updateNote = async (note: NewNote) => {
   const response = await fetch(`${URL_API}/note/${note.id}`, {
     method: "PATCH",
     headers: {

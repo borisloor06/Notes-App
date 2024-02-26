@@ -10,6 +10,11 @@ export interface Note {
   categories: Category[];
 }
 
+export interface NewNote
+  extends Omit<Note, "created" | "updated" | "categories"> {
+  categories: number[];
+}
+
 export const notesInitialState = {
   id: "",
   title: "",
@@ -17,6 +22,13 @@ export const notesInitialState = {
   state: true,
   created: "",
   updated: "",
+  categories: [{ id: 0, name: "" }],
+};
+
+export const newNoteInitialState = {
+  title: "",
+  content: "",
+  state: true,
   categories: [],
 };
 

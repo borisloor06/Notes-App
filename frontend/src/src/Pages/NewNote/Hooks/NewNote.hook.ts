@@ -1,4 +1,8 @@
-import { Note, notesInitialState } from "../../NoteList/interfaces/Note.type";
+import {
+  NewNote,
+  Note,
+  notesInitialState,
+} from "../../NoteList/interfaces/Note.type";
 import { createNote, updateNote } from "../Services/NewNote.service";
 import { useState } from "react";
 
@@ -6,7 +10,7 @@ export const useSaveNote = () => {
   const [error, setError] = useState(false);
   const [savedNote, setSavedNote] = useState(notesInitialState as Note);
 
-  const saveNote = (note: Note) => {
+  const saveNote = (note: NewNote) => {
     if (!note) {
       setError(true);
     }
@@ -28,6 +32,9 @@ export const useSaveNote = () => {
         }
         setSavedNote({
           ...note,
+          updated: new Date().toISOString(),
+          created: new Date().toISOString(),
+          categories: [],
         });
       });
     } catch (error) {
