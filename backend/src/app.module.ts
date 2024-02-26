@@ -5,6 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { NoteModule } from './note/note.module';
 import { DataSource } from 'typeorm';
+import { CategoryModule } from './category/category.module';
+// import { NoteCategoryModule } from './note_category/note_category.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -25,6 +27,8 @@ import { DataSource } from 'typeorm';
       inject: [ConfigService],
     }),
     NoteModule,
+    CategoryModule,
+    // NoteCategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

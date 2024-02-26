@@ -23,9 +23,9 @@ It was developed with nestjs backend framework and with react frontend library
 
 - Node v18.16.1
 - NPM v9.8.0
-- PostgresSql 16
-- Docker
-- docker-compose
+- PostgresSql 16.2-1
+- Docker 4.25.1
+- docker-compose v2.23.0-desktop.1
 
 You need an PostgesSql server and you have to create a table name note, you have the sql script in note.sql
 
