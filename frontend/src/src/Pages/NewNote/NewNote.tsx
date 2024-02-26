@@ -3,10 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import SaveIcon from "../../Components/SVG/SaveIcon/SaveIcon";
 import CloseIcon from "../../Components/SVG/CloseIcon/CloseIcon";
 import { useNote } from "./Hooks/Note.hook";
-import {
-  NewNote,
-  newNoteInitialState,
-} from "../NoteList/interfaces/Note.type";
+import { NewNote, newNoteInitialState } from "../NoteList/interfaces/Note.type";
 import { useSaveNote } from "./Hooks/NewNote.hook";
 import { Toast } from "../../Constants/constants";
 import { useCategories } from "./Hooks/Categories.hook";
@@ -22,7 +19,7 @@ export default function NewNote() {
 
   useEffect(() => {
     if (note && newNote.id !== note.id) {
-      const categories = note.categories.map((c) => c.id) as number[];
+      const categories = note?.categories?.map((c) => c.id) as number[];
       setNewNote({
         ...note,
         categories,
@@ -40,20 +37,19 @@ export default function NewNote() {
     });
   };
 
-  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    // if the checkbox is checked, we add the category to the note only ids
-    if (e.target.checked) {
+  // Toggle category
+  const toggleCategory = (categoryId: number) => {
+    if (newNote?.categories?.includes(categoryId)) {
       setNewNote({
         ...newNote,
-        categories: [...newNote.categories, +value],
+        categories: newNote.categories.filter((id) => id !== categoryId),
       });
-      return;
+    } else {
+      setNewNote({
+        ...newNote,
+        categories: [...newNote.categories, categoryId],
+      });
     }
-    setNewNote({
-      ...newNote,
-      categories: [+value],
-    });
   };
 
   const handleSave = () => {
@@ -69,7 +65,6 @@ export default function NewNote() {
         icon: "success",
         title: "Saved successfully",
       });
-      console.log(note);
       if (!note.state && note?.id) {
         return navigation(`/archive`);
       }
@@ -82,6 +77,13 @@ export default function NewNote() {
   };
 
   const validCategories = categories?.length > 0 && categories[0].id;
+  const categoryStyle = `
+  bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5
+  rounded
+`;
+  const checkboxStyle = `
+  h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500
+`;
 
   return (
     <div className="bg-white rounded shadow p-4 m-2 lg:mx-72">
@@ -120,19 +122,25 @@ export default function NewNote() {
         value={newNote?.content || ""}
         onChange={handleInputChange}
       ></textarea>
-      <section className="flex justify-end mt-4">
-        {/* we can select many categories for one note */}
+      <h3 className="text-gray-800 text-lg font-medium mt-4 mb-2 border-t-2 pt-3">
+        Categories
+      </h3>
+      <section className="flex flex-wrap">
         {validCategories &&
           categories.map((category) => (
-            <label key={category.id} className="flex items-center">
+            <label
+              key={category.id}
+              className="inline-flex items-center mr-4 mb-2"
+            >
               <input
                 type="checkbox"
                 name="categories"
                 value={category.id}
-                onChange={handleCheckboxChange}
-                checked={note.categories?.some((c) => c.id === category.id)}
+                className="form-checkbox h-3 w-3 text-blue-600"
+                onChange={() => toggleCategory(category.id as number)}
+                checked={newNote?.categories?.includes(category.id as number)}
               />
-              <span className="ms-2">{category.name}</span>
+              <span className="ml-2">{category.name}</span>
             </label>
           ))}
       </section>
