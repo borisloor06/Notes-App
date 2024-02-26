@@ -54,7 +54,10 @@ export class NoteService {
   }
 
   async findOne(id: number) {
-    return this.noteRepository.findOneByOrFail({ id });
+    return this.noteRepository.findOneOrFail({
+      where: { id },
+      relations: ['categories'],
+    });
   }
 
   async update(id: number, { categories, ...updateNote }: UpdateNoteDto) {
