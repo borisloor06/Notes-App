@@ -60,4 +60,4 @@ Run in terminal:
 
 You can now open your browser and go to http://localhost:3001 and use the app
 
-There is also an online version in http://nlp-project.me:3001/
+There is also an online version in https://note.nlp-project.me
