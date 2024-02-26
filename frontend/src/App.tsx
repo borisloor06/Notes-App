@@ -4,6 +4,8 @@ import RoutesWithNotFound from "./src/Pages/404/RoutesWithNotFound";
 import NotesList from "./src/Pages/NoteList/NoteList";
 import NewNote from "./src/Pages/NewNote/NewNote";
 import { NoteState } from "./src/Pages/NoteList/interfaces/Note.type";
+import Categories from "./src/Pages/Categories/Categories";
+import NewCategory from "./src/Pages/NewCategory/NewCategory";
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
           />
           <Route path="/new" element={<NewNote />} />
           <Route path="/edit/:id" element={<NewNote />} />
+          <Route path="/categories" element={<Categories/>} />
+          <Route path="/categories/new" element={<NewCategory />} />\
+          <Route path="/categories/edit/:id" element={<NewCategory />} />
         </Route>
       </RoutesWithNotFound>
     </BrowserRouter>

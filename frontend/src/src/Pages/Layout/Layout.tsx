@@ -12,7 +12,9 @@ export default function Layout() {
 
   const location = useLocation();
   const isNewNote =
-    location.pathname === "/new" || location.pathname.includes("/edit");
+    location.pathname === "/new" ||
+    location.pathname.includes("/edit") ||
+    location.pathname.includes("/categories");
 
   return (
     <main className="flex flex-col h-screen">
@@ -20,13 +22,16 @@ export default function Layout() {
       <main className="flex flex-1">
         <main className="flex-1 bg-tertiary overflow-y-auto p-8">
           {!isNewNote && (
-            <button
-              className="bg-blue-500 flex items-center justify-between px-4 py-2 rounded shadow text-white"
-              onClick={goNewNote}
-            >
-              <AddIcon />
-              <span className="ms-1">Create new note</span>
-            </button>
+            <section className="flex justify-between items-center mb-4">
+              <h1 className="text-3xl font-bold">Notes</h1>
+              <button
+                className="bg-blue-500 flex items-center justify-between px-4 py-2 rounded-lg shadow text-white"
+                onClick={goNewNote}
+              >
+                <AddIcon />
+                <span className="ms-1">Create new note</span>
+              </button>
+            </section>
           )}
           {<Outlet />}
         </main>
