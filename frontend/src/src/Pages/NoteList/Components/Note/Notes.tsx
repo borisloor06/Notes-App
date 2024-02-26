@@ -57,6 +57,7 @@ export default function Note({
     reload();
   };
 
+  const validCategories = categories.length && categories[0].id !== 0;
   return (
     <article className="bg-white p-4 rounded shadow">
       <div className="flex justify-between items-center">
@@ -97,13 +98,13 @@ export default function Note({
       <p className="text-gray-600 mt-2 text-sm">
         Last edited {daysAgo} days ago
       </p>
-      {categories.length && (
+      {validCategories ? (
         <footer className="flex justify-between items-center mt-4">
           {/* show categories */}
           <h3 className="text-gray-400 text-sm">Categories</h3>
 
           <div className="flex flex-wrap">
-            {categories.slice(0, 3).map((category, index) => (
+            {categories.slice(0, 2).map((category, index) => (
               <article
                 key={index}
                 className="bg-stone-200 text-stone-600 px-2 py-1 rounded mr-2 text-sm"
@@ -112,14 +113,14 @@ export default function Note({
               </article>
             ))}
 
-            {categories.length > 3 && (
+            {categories.length > 2 && (
               <article className="bg-gray-200 text-gray-600 px-2 py-1 rounded mr-2 text-sm">
-                +{categories.length - 3} more
+                +{categories.length - 2} more
               </article>
             )}
           </div>
         </footer>
-      )}
+      ) : null}
     </article>
   );
 }
