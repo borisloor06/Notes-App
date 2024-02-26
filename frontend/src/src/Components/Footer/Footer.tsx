@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Footer() {
   return (
-    <footer className="flex justify-between bg-primary p-4 text-white text-center">
+    <footer className="flex justify-between bg-indigo-500 p-4 text-white text-center">
       <p>Notes App</p>
       <p>2024</p>
       <p>
